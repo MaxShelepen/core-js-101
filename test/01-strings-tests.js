@@ -102,7 +102,7 @@ describe('01-strings-tasks', () => {
     );
   });
 
-  it.optional('isString should return true if argument is a string', () => {
+  it.only('isString should return true if argument is a string', () => {
     assert.equal(false, tasks.isString(), 'undefined');
     assert.equal(false, tasks.isString(null), 'null');
     assert.equal(false, tasks.isString([]), '[]');
