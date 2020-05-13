@@ -370,7 +370,7 @@ describe('03-arrays-tasks', () => {
   });
 
 
-  it.optional('propagateItemsByPositionIndex should propagate every item its position time', () => {
+  it.only('propagateItemsByPositionIndex should propagate every item its position time', () => {
     [
       {
         arr: [],
