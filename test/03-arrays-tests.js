@@ -370,7 +370,7 @@ describe('03-arrays-tasks', () => {
   });
 
 
-  it.only('propagateItemsByPositionIndex should propagate every item its position time', () => {
+  it.optional('propagateItemsByPositionIndex should propagate every item its position time', () => {
     [
       {
         arr: [],
@@ -398,7 +398,7 @@ describe('03-arrays-tasks', () => {
   });
 
 
-  it.optional('get3TopItems should return the 3 largest items from integer array', () => {
+  it.only('get3TopItems should return the 3 largest items from integer array', () => {
     [
       {
         arr: [],
