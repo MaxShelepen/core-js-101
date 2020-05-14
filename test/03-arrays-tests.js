@@ -398,7 +398,7 @@ describe('03-arrays-tasks', () => {
   });
 
 
-  it.only('get3TopItems should return the 3 largest items from integer array', () => {
+  it.optional('get3TopItems should return the 3 largest items from integer array', () => {
     [
       {
         arr: [],
