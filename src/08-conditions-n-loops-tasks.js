@@ -227,7 +227,7 @@ function findFirstSingleChar(str) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString( a, b, isStartIncluded, isEndIncluded) {
+function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
   const min = Math.min(a, b);
   const max = Math.max(a, b);
   if (isStartIncluded === false && isEndIncluded === false) return `(${min}, ${max})`;
@@ -250,8 +250,8 @@ function getIntervalString( a, b, isStartIncluded, isEndIncluded) {
  * 'rotator' => 'rotator'
  * 'noon' => 'noon'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
+function reverseString(str) {
+  return str.split('').reverse().join('');
 }
 
 
@@ -267,8 +267,8 @@ function reverseString(/* str */) {
  *   87354 => 45378
  *   34143 => 34143
  */
-function reverseInteger(/* num */) {
-  throw new Error('Not implemented');
+function reverseInteger(num) {
+  return num.toString().split('').reverse().join('');
 }
 
 
@@ -310,8 +310,9 @@ function isCreditCardNumber(/* ccn */) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  const numbers = num.toString().split('').reduce((acc, curr) => +acc + +curr, []);
+  return numbers.toString().split('').reduce((acc, curr) => +acc + +curr, []);
 }
 
 
@@ -336,8 +337,16 @@ function getDigitalRoot(/* num */) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  let copyStr = str;
+  if (str.length % 2 !== 0) return false;
+  const parentBracket = ['[]', '{}', '()', '<>'];
+  for (let i = 0; i < 5; i += 1) {
+    for (let j = 0; j < parentBracket.length; j += 1) {
+      copyStr = copyStr.replace(parentBracket[j], '');
+    }
+  }
+  return copyStr === '';
 }
 
 
@@ -361,8 +370,8 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  return num.toString(n);
 }
 
 
@@ -378,8 +387,19 @@ function toNaryString(/* num, n */) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  const basic = pathes[0];
+  let result = '';
+  for (let i = 0; i < basic.length; i += 1) {
+    const char = basic[i];
+    for (let j = 1; j < pathes.length; j += 1) {
+      if (char !== pathes[j][i]) {
+        return result.slice(0, result.lastIndexOf('/') + 1);
+      }
+    }
+    result += char;
+  }
+  return '';
 }
 
 
@@ -401,11 +421,17 @@ function getCommonDirectoryPath(/* pathes */) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
+function getMatrixProduct(m1, m2) {
+  let result = new Array(m1.length).fill(new Array(m2[0].length).fill(0));
+  result = result.map((itemA, indexA) => itemA.map((itemB, indexB) => {
+    let value = 0;
+    m1[indexA].forEach((itemC, indexC) => {
+      value += itemC * m2[indexC][indexB];
+    });
+    return value;
+  }));
+  return result;
 }
-
-
 /**
  * Returns the evaluation of the specified tic-tac-toe position.
  * See the details: https://en.wikipedia.org/wiki/Tic-tac-toe
@@ -436,8 +462,26 @@ function getMatrixProduct(/* m1, m2 */) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(position) {
+  const p11 = position[0][0];
+  const p12 = position[0][1];
+  const p13 = position[0][2];
+  const p21 = position[1][0];
+  const p22 = position[1][1];
+  const p23 = position[1][2];
+  const p31 = position[2][0];
+  const p32 = position[2][1];
+  const p33 = position[2][2];
+
+  if (p11 === p12 && p12 === p13 && p11) return p11;
+  if (p21 === p22 && p22 === p23 && p21) return p21;
+  if (p31 === p32 && p32 === p33 && p31) return p31;
+  if (p11 === p21 && p21 === p31 && p11) return p11;
+  if (p12 === p22 && p22 === p32 && p12) return p12;
+  if (p13 === p23 && p23 === p33 && p13) return p13;
+  if (p11 === p22 && p22 === p33 && p11) return p11;
+  if (p31 === p22 && p22 === p13 && p31) return p31;
+  return undefined;
 }
 
 
