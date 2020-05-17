@@ -54,7 +54,11 @@ function getRegexForGuid() {
  *
  */
 function getRegexForPitSpot() {
-  throw new Error('Not implemented');
+  const value = '[0-9A-Fa-f]';
+  const eight = `${value}{8}`;
+  const four = `${value}{4}`;
+  const twelve = `${value}{12}`;
+  return new RegExp(`{${eight}-${four}-${four}-${four}-${twelve}}`);
 }
 
 
@@ -78,8 +82,8 @@ function getRegexForPitSpot() {
  *   'PASSW0RD'.match(validator)  => false
  *   'Pa55'.match(validator) => false
  */
-function getPasswordValidator(/* minLength */) {
-  throw new Error('Not implemented');
+function getPasswordValidator(minLength) {
+  return new RegExp(`^(?! )(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])[0-9A-Za-z]{${minLength}}`);
 }
 
 
